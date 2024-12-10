@@ -8,15 +8,15 @@ import json
 
 app = Flask(__name__)
 
-model = load_model(r"D:\PTITHCM\Mon hoc\HK7(2024-2025)\IoT_And_Application\Final\EmailSpamClassifier_Web\models\cnn_spam_classifier.keras")
+model = load_model(r"D:\PTITHCM\Mon hoc\HK7(2024-2025)\IoT_And_Application\Final\EmailClassifier\models\cnn_spam_classifier.keras")
 
 # Load tokenizer
 # tokenizer = Tokenizer(num_words=500)
-with open(r"D:\PTITHCM\Mon hoc\HK7(2024-2025)\IoT_And_Application\Final\EmailSpamClassifier_Web\models\tokenizer.pkl", 'rb') as f:
+with open(r"D:\PTITHCM\Mon hoc\HK7(2024-2025)\IoT_And_Application\Final\EmailClassifier\models\tokenizer.pkl", 'rb') as f:
     tokenizer = pickle.load(f)
 # Define max sequence length
 # max_len = 100
-with open(r"D:\PTITHCM\Mon hoc\HK7(2024-2025)\IoT_And_Application\Final\EmailSpamClassifier_Web\models\config.json", 'r') as f:
+with open(r"D:\PTITHCM\Mon hoc\HK7(2024-2025)\IoT_And_Application\Final\EmailClassifier\models\config.json", 'r') as f:
     config = json.load(f)
 max_len = config['max_len']
 
