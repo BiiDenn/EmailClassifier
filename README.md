@@ -39,7 +39,7 @@ To solve the problem of email classification, helping users identify spam or non
 ### Installation
 1. Clone the repository:
 ```bash
-   git clone https://github.com/<username>/email-classification.git
+   git clone https://github.com/BiiDenn/EmailClassifier.git
    cd email-classification
 ```
 2. Install the required libraries:
