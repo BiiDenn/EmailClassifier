@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Spam Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Email Spam Classifier</h1>
+    <input type="text" id="emailInput" placeholder="Enter your email text here">
+    <button onclick="checkEmail()">Check</button>
+    <div class="result">
+        <p id="label"></p>
+        <p id="probability"></p>
+    </div>
+
+    <script>
+        function checkEmail() {
+            const emailText = document.getElementById('emailInput').value;
+    
+            // Reset result fields while waiting for a new response
+            document.getElementById('label').innerText = "Checking...";
+            document.getElementById('probability').innerText = "";
+    
+            // Send a request to the Flask server
+            fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: emailText })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the results with new data
+                document.getElementById('label').innerText = `Label: ${data.label}`;
+                document.getElementById('probability').innerText = `Confidence: ${data.probability.toFixed(2)}%`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('label').innerText = "Error occurred!";
+                document.getElementById('probability').innerText = "";
+            });
+        }
+    </script>
+</body>
+</html>
